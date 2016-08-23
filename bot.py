@@ -7,6 +7,7 @@ from LaTeX2IMG.LaTeX2IMG import latex2img
 import telebot
 from telebot import logging
 from telebot import types
+from time import gmtime, strftime
 
 
 TOKEN = ''
@@ -25,6 +26,12 @@ def send_equation(chat_id, text):
 
     with open(filename + '.webp', 'rb') as equation:
         bot.send_sticker(chat_id, equation)
+
+@bot.message_handler()
+def print_in_terminal(message):
+    print (strftime("%d-%m-%Y | %H:%M:%S", gmtime()) +
+    "> " + message.from_user.first_name + " " + message.from_user.last_name + ": " +
+    message.text)
 
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
