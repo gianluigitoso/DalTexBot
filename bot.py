@@ -27,18 +27,22 @@ def send_equation(chat_id, text):
     with open(filename + '.webp', 'rb') as equation:
         bot.send_sticker(chat_id, equation)
 
-@bot.message_handler()
 def print_in_terminal(message):
-    print (strftime("%d-%m-%Y | %H:%M:%S", gmtime()) +
-    "> " + message.from_user.first_name + " " + message.from_user.last_name + ": " +
+    print ("[" + strftime("%d-%m-%Y | %H:%M:%S", gmtime()) + "]" +
+    " - (ID: " + str(message.from_user.id) + " | @" + message.from_user.username + ") > " +
+    message.from_user.first_name + " " + message.from_user.last_name + ": " +
     message.text)
+
+#Message handlers
 
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
+    print_in_terminal(message)
     bot.reply_to(message, "You can convert LaTeX expression using\n\n/latex expression")
 
 @bot.message_handler(commands=['latex'])
 def send_expression(message):
+    print_in_terminal(message)
     chat_id = message.chat.id
     text = message.text[7:]
 
@@ -47,7 +51,11 @@ def send_expression(message):
     else:
         new_msg = bot.reply_to(message, "Please send your expression with \"/latex expression\"")
 
-
+#If invalid commands
+@bot.message_handler(func=lambda message: True)
+def echo_all(message):
+    print_in_terminal(message)
+    bot.reply_to(message, "Invalid input. Please send your expression with \"/latex expression\"")
 
 logger = telebot.logger
 formatter = logging.Formatter('[%(asctime)s] %(thread)d {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s',
