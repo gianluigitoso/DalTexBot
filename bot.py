@@ -28,6 +28,16 @@ def send_equation(chat_id, text):
         bot.send_sticker(chat_id, equation)
 
 def print_in_terminal(message):
+    if message.from_user.id == None:
+        message.from_user.id = ' '
+    if message.from_user.username == None:
+        message.from_user.username = ' '
+    if message.from_user.first_name == None:
+        message.from_user.first_name = ' '
+    if message.from_user.last_name == None:
+        message.from_user.last_name = ' '
+    if message.text == None:
+        message.text = ' '
     print ("[" + strftime("%d-%m-%Y | %H:%M:%S", gmtime()) + "]" +
     " - (ID: " + str(message.from_user.id) + " | @" + message.from_user.username + ") > " +
     message.from_user.first_name + " " + message.from_user.last_name + ": " +
