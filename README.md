@@ -1,4 +1,12 @@
+# DalTexBot
+I Love the [LaTeX2IMGbot] (https://github.com/analca3/LaTeX2IMGbot), and this is fork is a testing ground for my personal Telegram bot: [@DalTexBot] (https://telegram.me/DalTexBot)
+
+----------
+
+**Original ReadMe.md**:
+
 # LaTeX2IMGbot
+
 Telegram Bot that receive an LaTeX equation and uses LaTeX2IMG to send a sticker.
 
 This is developed with [pyTelegramBotAPI](https://github.com/eternnoir/pyTelegramBotAPI) using the listener mechanism. My bot is @LaTeX2IMGbot but you can create your own one =).
